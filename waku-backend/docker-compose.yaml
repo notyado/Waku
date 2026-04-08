@@ -1,0 +1,4 @@
+services:
+  waku-redis:
+    image: redis:8.2.5-bookworm
+    restart: always
