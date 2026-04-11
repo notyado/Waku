@@ -1,5 +1,5 @@
-env-up:
-	docker compose up -d waku-redis
+docker-up:
+	docker compose up --build -d
 
-env-down:
-	docker compose down waku-redis
+docker-down:
+	docker compose down
