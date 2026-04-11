@@ -1,0 +1,4 @@
+services:
+  nats:
+    image: nats:2.12.6-alpine
+    container_name: waku-nats
