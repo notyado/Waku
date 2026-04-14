@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  nats:
+    image: nats:2.12.6-alpine
+    container_name: waku-nats
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    command: ["-m", "8222"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8222/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build: ./waku-backend
+    container_name: waku-backend
+    ports:
+      - "8080:8080"
+    environment:
+      ADDR: ":8080"
+      NATS_URL: "nats://nats:4222"
+    depends_on:
+      nats:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build: ./waku-frontend
+    container_name: waku-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
