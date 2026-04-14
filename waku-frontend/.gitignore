@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+/bun.lockb
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+bun.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vite / SvelteKit / etc.
+.vite/
+.cache/

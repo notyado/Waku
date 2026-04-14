@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Waku Purple Theme */
+    --background: 264 50% 8%;
+    --foreground: 280 100% 98%;
+    --card: 264 40% 12%;
+    --card-foreground: 280 100% 98%;
+    --popover: 264 40% 12%;
+    --popover-foreground: 280 100% 98%;
+    --primary: 270 90% 66%;
+    --primary-foreground: 280 100% 98%;
+    --secondary: 264 40% 16%;
+    --secondary-foreground: 280 100% 98%;
+    --muted: 264 30% 20%;
+    --muted-foreground: 270 60% 70%;
+    --accent: 270 90% 75%;
+    --accent-foreground: 280 100% 98%;
+    --destructive: 0 70% 70%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 270 50% 25%;
+    --input: 270 50% 25%;
+    --ring: 270 90% 66%;
+    --radius: 1rem;
+    
+    /* Custom colors */
+    --bg-primary: #0F0A1E;
+    --bg-secondary: #1A122E;
+    --bg-tertiary: #251942;
+    --accent-primary: #A855F7;
+    --accent-secondary: #C084FC;
+    --accent-glow: #D8B4FE;
+    --text-primary: #FAF5FF;
+    --text-secondary: #E9D5FF;
+    --text-muted: #A78BFA;
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px rgba(168, 85, 247, 0.3);
+    --shadow-glow-strong: 0 0 60px rgba(168, 85, 247, 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-[#0F0A1E] text-[#FAF5FF] antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(168, 85, 247, 0.05);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(168, 85, 247, 0.3);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 85, 247, 0.5);
+  }
+  
+  /* Selection */
+  ::selection {
+    background: rgba(168, 85, 247, 0.4);
+    color: #FAF5FF;
+  }
+}
+
+@layer components {
+  /* Glow effects */
+  .glow-purple {
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.3);
+  }
+  
+  .glow-purple-strong {
+    box-shadow: 0 0 60px rgba(168, 85, 247, 0.5);
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #FAF5FF 0%, #C084FC 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Glass effect */
+  .glass {
+    background: rgba(26, 18, 46, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  /* Button gradient */
+  .btn-gradient {
+    background: linear-gradient(135deg, #A855F7 0%, #9333EA 100%);
+    box-shadow: 0 4px 24px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-gradient:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 32px rgba(168, 85, 247, 0.5);
+  }
+  
+  .btn-gradient:active {
+    transform: scale(0.98);
+  }
+  
+  /* Tag styles */
+  .tag {
+    @apply px-4 py-2 rounded-full text-sm font-medium transition-all duration-200;
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    color: #E9D5FF;
+  }
+  
+  .tag:hover {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: scale(1.05);
+  }
+  
+  .tag-active {
+    background: rgba(168, 85, 247, 0.25);
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.3);
+    color: #FAF5FF;
+  }
+  
+  /* Message bubble */
+  .message-own {
+    background: linear-gradient(135deg, #A855F7 0%, #9333EA 100%);
+    border-radius: 20px 20px 4px 20px;
+  }
+  
+  .message-partner {
+    background: rgba(37, 25, 66, 0.8);
+    border-radius: 20px 20px 20px 4px;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 40px rgba(168, 85, 247, 0.3);
+    }
+    to {
+      box-shadow: 0 0 60px rgba(168, 85, 247, 0.5);
+    }
+  }
+  
+  /* Safe area for mobile */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}
