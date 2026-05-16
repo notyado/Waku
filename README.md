@@ -1,4 +1,4 @@
-# Waku — Анонимный чат по интересам
+# Waku — Anonymous Interest-Based Chat
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
@@ -10,30 +10,30 @@
 </p>
 
 <p align="center">
-  <b>Waku</b> — веб-платформа для анонимного общения, основанная на общих интересах.<br>
-  Мгновенное подключение, полная анонимность, умный подбор собеседников.
+  <b>Waku</b> — a web platform for anonymous communication based on shared interests.<br>
+  Instant connections, complete anonymity, and smart user matching.
 </p>
 
 ---
 
-## Возможности
+## Features
 
-- **Полная анонимность** — вход без регистрации, временный ID
-- **Подбор по интересам** — выбирай до 10 тегов, находи людей со схожими увлечениями
-- **Мгновенное соединение** — WebSocket для real-time общения
-- **Интерактивный чат** — индикатор "печатает", статусы доставки/прочтения
-- **Красивый UI** — фиолетовая тема с плавными анимациями
-- **Адаптивный дизайн** — работает на мобильных и десктопе
+* **Complete anonymity** — no registration required, temporary user IDs
+* **Interest-based matching** — choose up to 10 tags and find people with similar interests
+* **Instant connection** — WebSocket-powered real-time communication
+* **Interactive chat** — typing indicator, delivery/read statuses
+* **Beautiful UI** — purple-themed interface with smooth animations
+* **Responsive design** — works on both mobile and desktop
 
 ---
 
-## Быстрый старт
+## Quick Start
 
-### Требования
+### Requirements
 
-- Docker & Docker Compose
+* Docker & Docker Compose
 
-### Запуск через Docker Compose
+### Run with Docker Compose
 
 ```bash
 git clone https://github.com/notyado/Waku.git
@@ -41,37 +41,37 @@ cd Waku
 docker-compose up --build
 ```
 
-### Доступ к сервисам
+### Service Access
 
-| Сервис | Ссылка | Описание |
-| :--- | :--- | :--- |
-| **Frontend** | [http://localhost:3000](http://localhost:3000) | Клиентское React приложение |
-| **Backend API** | [http://localhost:8080](http://localhost:8080) | WebSocket сервер на Go |
+| Service         | URL                                            | Description               |
+| :-------------- | :--------------------------------------------- | :------------------------ |
+| **Frontend**    | [http://localhost:3000](http://localhost:3000) | React client application  |
+| **Backend API** | [http://localhost:8080](http://localhost:8080) | Go-based WebSocket server |
 
 ---
 
-## Структура проекта
+## Project Structure
 
-```
+```text
 waku/
-├── waku-backend/         # Go бекенд
+├── waku-backend/         # Go backend
 │   ├── cmd/api/
-│   │   └── main.go       # Точка входа
+│   │   └── main.go       # Entry point
 │   ├── internal/
-│   │   ├── matchmaker/   # Алгоритм подбора
-│   │   ├── models/       # Модели данных
-│   │   ├── nats/         # NATS клиент
-│   │   └── server/       # WebSocket сервер
-│   ├── config/           # Конфигурация
+│   │   ├── matchmaker/   # Matching algorithm
+│   │   ├── models/       # Data models
+│   │   ├── nats/         # NATS client
+│   │   └── server/       # WebSocket server
+│   ├── config/           # Configuration
 │   ├── Dockerfile
 │   └── go.mod
 │
-├── waku-frontend/        # React фронтенд
+├── waku-frontend/        # React frontend
 │   ├── src/
 │   │   ├── components/
-│   │   │   └── screens/  # Экраны приложения
+│   │   │   └── screens/  # Application screens
 │   │   ├── store/        # Zustand store
-│   │   └── types/        # TypeScript типы
+│   │   └── types/        # TypeScript types
 │   ├── Dockerfile
 │   └── package.json
 │
@@ -80,67 +80,68 @@ waku/
 
 ---
 
-## Технологии
+## Technologies
 
-### Бекенд (Go)
+### Backend (Go)
 
-- **Go 1.26** — язык программирования
-- **Gorilla WebSocket** — WebSocket соединения
-- **NATS** — message broker для масштабирования
-- **UUID** — генерация уникальных ID
+* **Go 1.26** — programming language
+* **Gorilla WebSocket** — WebSocket connections
+* **NATS** — message broker for scaling
+* **UUID** — unique ID generation
 
-### Фронтенд (React + TypeScript)
+### Frontend (React + TypeScript)
 
-- **React 18**
-- **TypeScript** — типизация
-- **Vite** — сборщик
-- **Zustand** — state management
-- **Framer Motion** — анимации
-- **Tailwind CSS** — стилизация
-- **shadcn/ui** — компоненты
+* **React 18**
+* **TypeScript** — static typing
+* **Vite** — build tool
+* **Zustand** — state management
+* **Framer Motion** — animations
+* **Tailwind CSS** — styling
+* **shadcn/ui** — UI components
 
 ---
 
-## Основные компоненты
+## Core Components
 
 ### Matchmaker (`internal/matchmaker/`)
 
-Алгоритм подбора собеседников по приоритетам:
-1. Максимальное совпадение тегов
-2. Время ожидания (FIFO)
-3. Fallback на любого доступного пользователя
+User matching algorithm priorities:
+
+1. Maximum tag overlap
+2. Waiting time (FIFO)
+3. Fallback to any available user
 
 ### WebSocket Hub (`internal/server/`)
 
-- Управление клиентскими соединениями
-- Маршрутизация сообщений через NATS
-- Управление комнатами чата
+* Client connection management
+* Message routing through NATS
+* Chat room management
 
 ---
 
-## API WebSocket
+## WebSocket API
 
-### Исходящие сообщения (Client → Server)
+### Outgoing Messages (Client → Server)
 
-| Тип | Описание | Payload |
-|-----|----------|---------|
-| `join` | Начать поиск | `tags: string[]` |
-| `message` | Отправить сообщение | `msg_id, text` |
-| `typing` | Индикатор печати | `is_typing: boolean` |
-| `skip` | Пропустить чат | — |
-| `read` | Прочитано | `msg_id` |
+| Type      | Description       | Payload              |
+| --------- | ----------------- | -------------------- |
+| `join`    | Start searching   | `tags: string[]`     |
+| `message` | Send a message    | `msg_id, text`       |
+| `typing`  | Typing indicator  | `is_typing: boolean` |
+| `skip`    | Skip current chat | —                    |
+| `read`    | Mark as read      | `msg_id`             |
 
-### Входящие сообщения (Server → Client)
+### Incoming Messages (Server → Client)
 
-| Тип | Описание | Payload |
-|-----|----------|---------|
-| `joined` | Подключение установлено | `user_id` |
-| `searching` | В очереди поиска | — |
-| `matched` | Собеседник найден | `room_id, common_tags` |
-| `chat_message` | Новое сообщение | `msg_id, text, timestamp` |
-| `partner_left` | Собеседник вышел | — |
-| `delivered` | Сообщение доставлено | `msg_id` |
-| `read_ack` | Сообщение прочитано | `msg_id` |
+| Type           | Description            | Payload                   |
+| -------------- | ---------------------- | ------------------------- |
+| `joined`       | Connection established | `user_id`                 |
+| `searching`    | In matchmaking queue   | —                         |
+| `matched`      | Partner found          | `room_id, common_tags`    |
+| `chat_message` | New message            | `msg_id, text, timestamp` |
+| `partner_left` | Chat partner left      | —                         |
+| `delivered`    | Message delivered      | `msg_id`                  |
+| `read_ack`     | Message read           | `msg_id`                  |
 
 ---
 
